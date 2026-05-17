@@ -1,5 +1,5 @@
 """
-This file is part of the raclette project (P.I. E. Dammer)
+This file is part of the raclette project
 It codes the command line interface
 
 
@@ -41,7 +41,7 @@ def command_line_interface(args):
     ###add arguments
     parser.add_argument('dep', help='Dependency file to analyse'+
                                          '\nCan be a setup.py, pyproject.toml')
-    parser.add_argument('pl', help="Programming language", choices = ['python', 'R'])
+    parser.add_argument('source', help="source", choices = ['pypi', 'R', 'github'])
     parser.add_argument('--package_version', help="if a single package name is given, this gives the version. If nothing is given, that latest findable version will be assumed")
     
     parser.add_argument('--token')

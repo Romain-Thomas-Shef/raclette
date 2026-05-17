@@ -17,8 +17,9 @@ import os
 import sys
 
 ####Local imports
-from .utils import cli
+from .utils import cli, read_online_file
 from .queries import pypi, github
+from . import cff_to_bibtex
 
 def main():
     '''
@@ -30,7 +31,7 @@ def main():
     args = cli.command_line_interface(sys.argv[1:])
 
     ##Analyse what was given    
-    language = args['pl']
+    source = args['source']
 
     packages = {}
     if args['is_file']:
@@ -44,9 +45,19 @@ def main():
         else:
             packages[args['dep']] = None
 
-
     ###make the query
     for package in packages:
-        info =pypi.get_package_info(package)
-        print(info)
-        github.get_citation(info['owner'], info['repo'], args['token'])
+        if source == 'pypi':
+            info =pypi.get_package_info(package)
+        elif source == 'github':
+            info = github.slash_repo_url(package)
+        citation_files = github.get_citation_url(info['owner'], info['repo'], args['token'])
+
+        for file in citation_files:
+            content,asstring = read_online_file.get_file(file)
+            if 'bib' in file:
+                bibtex = asstring
+                print('BIB:\n' + bibtex)
+            if 'cff' in file:
+                bibtex = cff_to_bibtex.cff_to_bibtex(content, initial_only=False, author_number=-99)
+                print('CFF:\n' + bibtex)

@@ -13,6 +13,7 @@ Year: 2025-
 import requests
 
 ##Local imports
+from . import github
 
 
 def get_package_info(package_name):
@@ -28,9 +29,10 @@ def get_package_info(package_name):
         urls = data['project_urls']
         for i in urls:
             if 'github.com' in urls[i] and 'issues' not in urls[i] and 'releases' not in urls[i]:
-                github = urls[i]
-                owner = github.split('/')[3]
-                repo = github.split('/')[4].split('.git')[0]
+                github_url = urls[i]
+                github_info = github.slash_repo_url(github_url)
+                owner = github_info['owner']
+                repo = github_info['repo']
 
         package_info['name'] = data['name']
         package_info['version'] = data['version']
