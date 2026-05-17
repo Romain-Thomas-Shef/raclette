@@ -1,0 +1,21 @@
+[uild-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raclette"
+version = "25.5.1"
+requires-python = ">=3.10"
+authors = [{ name = "R. Thomas", email = "romain.thomas@sheffield.ac.uk" }]
+dependencies = []
+
+#[project.urls]
+#repository = ""
+#homepage = ""
+
+
+[project.scripts]
+raclette = "raclette.main:main"
+
+[tool.hatch.build.targets.sdist]
+include = ["/raclette"]
