@@ -51,7 +51,7 @@ def main():
             info =pypi.get_package_info(package)
         elif source == 'github':
             info = github.slash_repo_url(package)
-        citation_files = github.get_citation_url(info['owner'], info['repo'], args['token'])
+        citation_files, other_info = github.get_citation_url(info['owner'], info['repo'], args['token'])
 
         for file in citation_files:
             content,asstring = read_online_file.get_file(file)

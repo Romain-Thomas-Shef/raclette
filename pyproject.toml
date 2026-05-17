@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "raclette"
 version = "25.5.1"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 authors = [{ name = "R. Thomas", email = "romain.thomas@sheffield.ac.uk" }]
 dependencies = []
 

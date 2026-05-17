@@ -8,6 +8,7 @@ Year: 2025-
 '''
 
 ##Python standard library
+import datetime
 
 ##Third party
 import requests
@@ -56,6 +57,7 @@ def get_citation_url(owner, repo, token):
     '''
     #initialise the files
     citation_files_urls = []
+    other_info = {}
 
     ##
     headers = {"Accept": "application/vnd.github.v3+json"}
@@ -66,6 +68,21 @@ def get_citation_url(owner, repo, token):
     repo_data = requests.get(repo_url).json()
 
     branch = repo_data["default_branch"]
+    for i in repo_data:
+        print(i, repo_data[i])
+
+
+    ##other info
+    other_info['creation_date'] = repo_data['created_at']
+    other_info['repo_url'] = repo_data['html_url']
+    other_info['name'] = repo_data['name']
+    other_info['access_date'] = datetime.datetime.now().isoformat()
+
+    ''' --> get name
+    user_github_url = f"https://api.github.com/users/{repo_data['owner']['login']}"  
+    user_json = requests.get(user_github_url, headers=headers)
+    print(user_json.json().get('name'))
+    '''
 
     tree_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
     tree_data = requests.get(tree_url, headers=headers).json()
@@ -84,4 +101,4 @@ def get_citation_url(owner, repo, token):
         file_data = requests.get(file_url, headers=headers).json()
         citation_files_urls.append(file_data['download_url'])
 
-    return citation_files_urls
+    return citation_files_urls, other_info
