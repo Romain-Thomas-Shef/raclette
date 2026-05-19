@@ -68,9 +68,10 @@ def get_citation_url(owner, repo, token):
     repo_data = requests.get(repo_url).json()
 
     branch = repo_data["default_branch"]
+    '''
     for i in repo_data:
         print(i, repo_data[i])
-
+    '''
 
     ##other info
     other_info['creation_date'] = repo_data['created_at']
