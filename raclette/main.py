@@ -53,11 +53,18 @@ def main():
             info = github.slash_repo_url(package)
         citation_files, other_info = github.get_citation_url(info['owner'], info['repo'], args['token'])
 
-        for file in citation_files:
-            content,asstring = read_online_file.get_file(file)
-            if 'bib' in file:
-                bibtex = asstring
-                print('BIB:\n' + bibtex)
-            if 'cff' in file:
-                bibtex = cff_to_bibtex.cff_to_bibtex(content, initial_only=False, author_number=-99)
-                print('CFF:\n' + bibtex)
+        if not citation_files:
+            print('No citation files found')
+            nofile_citation_info = github.get_owners_name(other_info, token)
+            print(nofile_citation_info) 
+        else:
+            for file in citation_files:
+                content,asstring = read_online_file.get_file(file)
+                if 'bib' in file:
+                    bibtex = asstring
+                    print('BIB:\n' + bibtex)
+                if 'cff' in file:
+                    bibtex = cff_to_bibtex.cff_to_bibtex(content, initial_only=False, author_number=-99)
+                    print('CFF:\n' + bibtex)
+
+            

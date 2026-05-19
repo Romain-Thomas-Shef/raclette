@@ -35,6 +35,23 @@ def slash_repo_url(url):
         
     return info
 
+def get_owners_name(github_info, token):
+    '''
+    This function gets the name of the repo user (not the github username)
+    '''
+    ##
+    headers = {"Accept": "application/vnd.github.v3+json"}
+    if token:
+        headers["Authorization"] = f"token {token}"
+
+    user_github_url = f"https://api.github.com/users/{github_info['login']}"  
+    user_json = requests.get(user_github_url, headers=headers)
+    name_user = user_json.json().get('name') 
+ 
+    other_info['name_user'] = name_user
+
+    return other_info
+
 def get_citation_url(owner, repo, token):
     '''
     This function goes to github and tries to find
@@ -68,22 +85,14 @@ def get_citation_url(owner, repo, token):
     repo_data = requests.get(repo_url).json()
 
     branch = repo_data["default_branch"]
-    '''
-    for i in repo_data:
-        print(i, repo_data[i])
-    '''
 
-    ##other info
+    ##collect other info
     other_info['creation_date'] = repo_data['created_at']
     other_info['repo_url'] = repo_data['html_url']
-    other_info['name'] = repo_data['name']
+    other_info['repo_name'] = repo_data['name']
     other_info['access_date'] = datetime.datetime.now().isoformat()
+    other_info['login'] = repo_data['owner']['login']
 
-    ''' --> get name
-    user_github_url = f"https://api.github.com/users/{repo_data['owner']['login']}"  
-    user_json = requests.get(user_github_url, headers=headers)
-    print(user_json.json().get('name'))
-    '''
 
     tree_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
     tree_data = requests.get(tree_url, headers=headers).json()
