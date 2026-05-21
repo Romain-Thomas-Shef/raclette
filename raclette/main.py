@@ -17,7 +17,7 @@ import os
 import sys
 
 ####Local imports
-from .utils import cli, read_online_file
+from .utils import cli, read_online_file, open_files
 from .queries import pypi, github
 from . import cff_to_bibtex
 
@@ -34,9 +34,11 @@ def main():
     source = args['source']
 
     packages = {}
-    if args['is_file']:
+    if not args['source']:
         ##A file is given, e must read it and extract packages name and versions
         package = {}
+        open_files.read_toml(args['dep'])
+        
 
     else:
         ##a simple package was given  

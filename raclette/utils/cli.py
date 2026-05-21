@@ -41,11 +41,10 @@ def command_line_interface(args):
     ###add arguments
     parser.add_argument('dep', help='Dependency file to analyse'+
                                          '\nCan be a setup.py, pyproject.toml')
-    parser.add_argument('source', help="source", choices = ['pypi', 'R', 'github'])
+    parser.add_argument('--source', help="source", choices = ['pypi', 'R', 'github'])
     parser.add_argument('--package_version', help="if a single package name is given, this gives the version. If nothing is given, that latest findable version will be assumed")
     
     parser.add_argument('--token')
-    parser.add_argument('--is_file', action='store_true')
     parser.add_argument('--version', action='version', version='1.0')
 
     ###analyse the arguments
