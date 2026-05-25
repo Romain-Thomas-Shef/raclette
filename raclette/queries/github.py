@@ -82,7 +82,7 @@ def get_citation_url(owner, repo, token):
         headers["Authorization"] = f"token {token}"
 
     repo_url = f"https://api.github.com/repos/{owner}/{repo}"
-    repo_data = requests.get(repo_url).json()
+    repo_data = requests.get(repo_url, headers=headers).json()
 
     branch = repo_data["default_branch"]
 

@@ -1,6 +1,6 @@
 """
 This file is part of the raclette project
-it read pyproject.toml and get the list of packages 
+just file handling
 
 
 Author: R. Thomas
@@ -9,62 +9,34 @@ Year: 2025-
 """
 
 ###Python standard library
-import tomllib
-
+import urllib
 
 ##Third party
 
 ##Local imports
 
-def read_toml(file, include_optional=False):
+def get_online_file(url):
     '''
-    Read the yaml file give as argument
+    read the file at the url given in argument
 
     Parameters
     -----------
-    file    :  str  
-               path to the file to read
+    url    :   str
+               the url to read
 
     Returns
     -------
-    packages    : dictionary
-                  keys = packages
-                  values = version number (if any), or url, or None
+    content  :
 
-    Warning: We do not check that the file exist
+
+    Warning: we do not check if the url exist!
     '''
-    with open(file, 'rb') as tomlfile:
-        file = tomllib.load(tomlfile)
+    ##initialise the list
+    content = []
 
+    ##read the file
+    file = urllib.request.urlopen(url)
+    for line in file:
+        content.append(line.decode('utf-8'))
 
-    ##read the project section and find dependencies sub-section
-    dependencies_section = []
-    for subsection in file['project']:
-        if subsection == 'dependencies':
-            dependencies_section.append(subsection)
-        elif include_optional is True and subsection == 'optional-dependencies':
-            dependencies_section.append(subsection)
-
-    ##extract dependencies
-    all_dep = []
-    for ss in dependencies_section:
-        for dep in file['project'][ss]:
-            if ss == 'optional-dependencies':
-                for subdep in file['project'][ss][dep]:
-                    all_dep.append(subdep)
-            else:
-                all_dep.append(dep)
-
-
-    ##Cut all dep to find version
-    final_dep_versions = {}
-    for dep in all_dep:
-        #print(dep)
-        if '==' in dep:
-            final_dep_versions[dep.split('==')[0]] = dep.split('==')[1]
-        if '~=' in dep:
-            final_dep_versions[dep.split('~=')[0]] = dep.split('~=')[1]
-
-
-    print(final_dep_versions)
-            
+    return content, ''.join(content)
