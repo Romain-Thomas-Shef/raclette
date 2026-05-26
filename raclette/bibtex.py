@@ -11,10 +11,11 @@ Year: 2025-
 ###Python standard library
 
 ##Third party
+import bibtexparser
 
 ##Local imports
 
-def extract_line_data(bibtex, field):
+def extract_line_data(bibtex, selected_field):
     '''
     This function extracts all the data
     of a bibtex field.
@@ -30,10 +31,10 @@ def extract_line_data(bibtex, field):
 
     Parameters
     ----------
-    bibtex  :   list
-                of bibtex lines
-    field   :   str
-                bibtex we want the data from 
+    bibtex  :   str
+                the bibtex text
+    selected_field   :   str
+                         bibtex we want the data from 
     Return
     ------
     data    :   str
@@ -41,18 +42,22 @@ def extract_line_data(bibtex, field):
     '''
     ###we always return data
     data = None 
-    no_bracket = None
 
-    for line in bibtex: 
-        if field in line:
-            no_bracket = line.replace(' ', '').split('=')[1].replace(',', '').replace('}', '').replace('{', '').strip('\n')
+    ###parse the bibtex entry
+    parsed = bibtexparser.parse_string(bibtex)
 
-    if field == 'doi' and no_bracket is not None:
-        if 'https://doi.org/' in no_bracket:
-            data = no_bracket
-        else:
-            data = 'https://doi.org/' + no_bracket
-    elif no_bracket is not None:
-        data = no_bracket
+    ##We assume one entry per bib file
+    text = parsed.entries[0]
+    for field in text.fields:
+        if selected_field in field.key:
+
+            if selected_field == 'doi' and field.key == 'doi':
+                if 'https://doi.org/' in field.value:
+                    data = field.key
+                else:
+                    data = 'https://doi.org/' + field.value 
+
+            elif selected_field in field.key:
+                data = field.value
 
     return data
