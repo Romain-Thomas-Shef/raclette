@@ -36,7 +36,6 @@ def main():
 
     for package in config['packages']:
         bibtex_info = analyse_package(config['packages'][package], config['source'], token=token)
-        print(bibtex_info)
 
 def analyse_package(package, source, token=False):
     '''
@@ -59,6 +58,8 @@ def analyse_package(package, source, token=False):
                 'version': None,
                 'repo_url': None,
                 'cran_url': None,
+                'repo_owner': None,
+                'repo_name': None,
                 'julia_url': None,
                 'last_commit': None,
                 'citation_url': None,
@@ -77,14 +78,21 @@ def analyse_package(package, source, token=False):
 
         ##scrap pypi
         info = python_analysis.get_pypi_info(package['name'])        
+
         #add pypi url 
-        all_data['pypi_url'] = info['pypi_url']
+        if info:
+            all_data['pypi_url'] = info['pypi_url']
+            all_data['repo_owner'] = info['repo_owner']
+            all_data['repo_name'] = info['repo_name']
+
 
     ##Find citation files
-    citation_files, other_info = github.get_citation_url(info['repo_owner'], info['repo_name'], token)
+    citation_files = [] 
+    if all_data['repo_owner']:
+        citation_files, other_info = github.get_citation_url(all_data['repo_owner'], all_data['repo_name'], token)
 
-    ###add repository url to all data
-    all_data['repo_url'] = other_info['repo_url']
+        ###add repository url to all data
+        all_data['repo_url'] = other_info['repo_url']
 
     ##prioritise
     if citation_files:
@@ -94,19 +102,19 @@ def analyse_package(package, source, token=False):
             if '.bib' in f:
                 #Read the file
                 all_data['bibtex_source'] = f
-                lines, bibtex_str = open_files.get_online_file(f)
+                _, bibtex_str = open_files.get_online_file(f)
 
                 ##bibtex
                 all_data['bibtex'] = bibtex_str
 
                 ###get doi url
-                all_data['doi_url'] = bibtex.extract_line_data(lines, 'doi')
+                all_data['doi_url'] = bibtex.extract_line_data(bibtex_str, 'doi')
 
                 ###if we have a bibtex we do not need the latest commit
                 all_data['last_commit'] = 'N.A.'
 
                 ###url in bibtex
-                all_data['citation_url'] = bibtex.extract_line_data(lines, 'url')
+                all_data['citation_url'] = bibtex.extract_line_data(bibtex_str, 'url')
 
                 ###if it comes from the .bib file it will work for all version
                 all_data['version'] = 'all'
@@ -114,7 +122,7 @@ def analyse_package(package, source, token=False):
                 break
 
             ###then to .cff
-            elif '.cff' in f and bibtex_source is not None:
+            elif '.cff' in f:
                bibtex_source = f
                  
         
@@ -123,6 +131,7 @@ def analyse_package(package, source, token=False):
 
 
     return all_data
+
 '''
 ###make the query
 for package in packages:

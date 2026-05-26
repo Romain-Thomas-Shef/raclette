@@ -47,7 +47,6 @@ def cross_match_database(package, db_query):
             package['doi_url'] = db_query[0].doi_url
             package['bibtex_source'] = db_query[0].bibtex_source
             package['bibtex'] = db_query[0].bibtex
-            
 
         if len(db_query) > 1:
             highest_version = None
