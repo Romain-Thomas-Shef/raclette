@@ -6,6 +6,9 @@ Author: R. Thomas
 Place: U. of Sheffield, RSE Team
 Year: 2025-
 """
+##Standard library
+import re
+
 
 def cross_match_database(package, db_query):
     '''
@@ -44,14 +47,16 @@ def cross_match_database(package, db_query):
             package['julia_url'] = db_query[0].julia_url
             package['commit'] = db_query[0].commit
             if db_query[0].citation_url != '[]':
-                package['citation_url'] = [i.strip(']').strip('[').strip(' ').strip("'") for i in db_query[0].citation_url.split(',')]
+                package['citation_url'] = re.sub("\\ |\\]|\\[|\\'", "", db_query[0].citation_url).split(',') 
             else:
                 package['citation_url'] = [None]
         
             if db_query[0].doi_url != '[]':
-                package['doi_url'] = [i.strip(']').strip('[').strip(' ').strip("'")for i in db_query[0].doi_url.split(',')]  
+                package['doi_url'] = re.sub("\\ |\\]|\\[|\\'", "", db_query[0].doi_url).split(',') 
             else:
                 package['doi_url'] = [None]
+
+            package['citations'] = re.sub("\\ |\\]|\\[|\\'", "", db_query[0].doi_citation).split(',')
             package['bibtex_source'] = db_query[0].bibtex_source
             package['bibtex'] = db_query[0].bibtex
 
