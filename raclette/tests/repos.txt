@@ -1,0 +1,4 @@
+Double in bib: https://github.com/janelia-flyem/gala/blob/master/CITATION.bib
+Double in bib: https://github.com/PerovskiteSCModelling/IonMonger/blob/master/citation.bib
+
+
