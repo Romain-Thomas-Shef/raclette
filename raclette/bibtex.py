@@ -63,4 +63,4 @@ def extract_bibtex_data(bibtex, selected_field):
                     data = field.value
                 saved_data.append(data)
 
-    return data
+    return saved_data
