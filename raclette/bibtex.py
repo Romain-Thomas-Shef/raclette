@@ -15,7 +15,7 @@ import bibtexparser
 
 ##Local imports
 
-def extract_line_data(bibtex, selected_field):
+def extract_bibtex_data(bibtex, selected_field):
     '''
     This function extracts all the data
     of a bibtex field.
@@ -46,18 +46,21 @@ def extract_line_data(bibtex, selected_field):
     ###parse the bibtex entry
     parsed = bibtexparser.parse_string(bibtex)
 
-    ##We assume one entry per bib file
-    text = parsed.entries[0]
-    for field in text.fields:
-        if selected_field in field.key:
+    saved_data = []
+    ##go through entries in bibtex
+    for entry in parsed.entries:
+        ##for each entry
+        for field in entry.fields:
+            if selected_field in field.key:
+                
+                if selected_field == 'doi' and field.key == 'doi':
+                    if 'https://doi.org/' in field.value:
+                        data = field.key
+                    else:
+                        data = 'https://doi.org/' + field.value 
 
-            if selected_field == 'doi' and field.key == 'doi':
-                if 'https://doi.org/' in field.value:
-                    data = field.key
-                else:
-                    data = 'https://doi.org/' + field.value 
-
-            elif selected_field in field.key:
-                data = field.value
+                elif selected_field in field.key:
+                    data = field.value
+                saved_data.append(data)
 
     return data
