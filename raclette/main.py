@@ -88,6 +88,7 @@ def analyse_package(package, source, token=False):
             all_data['repo_name'] = info['repo_name']
 
 
+
     ##Find citation files
     citation_files = [] 
     if all_data['repo_owner']:
