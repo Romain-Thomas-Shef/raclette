@@ -712,7 +712,6 @@ https://github.com/wetransform-os/ProMCDA
 https://github.com/C2SM-RCM/emiproc
 https://github.com/sisl/ExpFamilyPCA.jl
 https://github.com/bricoletc/delfies
-
 https://github.com/harvard-nrg/dwiqc
 https://github.com/GreycLab/gmic
 https://github.com/sinanozaydin/pide
@@ -2889,7 +2888,7 @@ https://github.com/bjmorgan/pyscses
 https://github.com/mrecos/klrfome
 https://github.com/ucgmsim/GMSimViz
 https://github.com/climateequityreferenceproject/cerc-web
-https://github.com/astrom-tom/dfitspy
+https://github.com/astrom-tom/dfit spy
 https://github.com/JuliaMusic/MIDI.jl
 https://github.com/Non-Contradiction/JuliaCall
 https://github.com/athrom/CytobankAPIstats

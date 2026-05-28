@@ -65,6 +65,7 @@ def analyse_package(package, source, token=False):
                 'citation_url': None,
                 'doi_url': None,
                 'bibtex_source': None,
+                'bibtex_source_type': None,
                 'bibtex': None}
 
     ##start filling the results:
@@ -100,6 +101,9 @@ def analyse_package(package, source, token=False):
 
             ###priority is given to .bib files
             if '.bib' in f:
+                ##update bibtex source type
+                all_data['bibtex_source_type'] = '.bib file'
+
                 #Read the file
                 all_data['bibtex_source'] = f
                 _, bibtex_str = open_files.get_online_file(f)
@@ -108,13 +112,13 @@ def analyse_package(package, source, token=False):
                 all_data['bibtex'] = bibtex_str
 
                 ###get doi url
-                all_data['doi_url'] = bibtex.extract_line_data(bibtex_str, 'doi')
+                all_data['doi_url'] = bibtex.extract_bibtex_data(bibtex_str, 'doi')
 
                 ###if we have a bibtex we do not need the latest commit
                 all_data['last_commit'] = 'N.A.'
 
                 ###url in bibtex
-                all_data['citation_url'] = bibtex.extract_line_data(bibtex_str, 'url')
+                all_data['citation_url'] = bibtex.extract_bibtex_data(bibtex_str, 'url')
 
                 ###if it comes from the .bib file it will work for all version
                 all_data['version'] = 'all'
@@ -123,9 +127,11 @@ def analyse_package(package, source, token=False):
 
             ###then to .cff
             elif '.cff' in f:
-               bibtex_source = f
-                 
-        
+                ##update bibtex source type
+                all_data['bibtex_source_type'] = '.cff file'
+
+
+    
     else:
         print('not found')
 
