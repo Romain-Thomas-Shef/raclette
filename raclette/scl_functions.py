@@ -43,8 +43,8 @@ def cross_match_database(package, db_query):
             package['cran_url'] = db_query[0].cran_url
             package['julia_url'] = db_query[0].julia_url
             package['commit'] = db_query[0].commit
-            package['citation_url'] = db_query[0].citation_url
-            package['doi_url'] = db_query[0].doi_url
+            package['citation_url'] = [i.strip(']').strip('[').strip(' ').strip("'")for i in db_query[0].citation_url.split(',')]
+            package['doi_url'] = [i.strip(']').strip('[').strip(' ').strip("'")for i in db_query[0].doi_url.split(',')]  
             package['bibtex_source'] = db_query[0].bibtex_source
             package['bibtex'] = db_query[0].bibtex
 
