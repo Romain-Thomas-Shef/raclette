@@ -1,6 +1,6 @@
-from raclette import extract_bibtex_data
+from raclette import get_citations
 
-with open('citation_double.bib') as F:
-    A=F.read()
+doi = 'https://doi.org/10.21105/joss.01249'
 
-A = extract_bibtex_data(A, 'doi')
+get_citations(doi)
+

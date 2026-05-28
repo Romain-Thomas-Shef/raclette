@@ -19,7 +19,7 @@ import sys
 ####Local imports
 from .utils import cli, open_files
 from .queries import pypi, github
-from . import cff_to_bibtex,bibtex,python_analysis
+from . import cff_to_bibtex,bibtex,python_analysis, crossref
 
 def main():
     '''
@@ -64,6 +64,7 @@ def analyse_package(package, source, token=False):
                 'last_commit': None,
                 'citation_url': None,
                 'doi_url': None,
+                'citations': None,
                 'bibtex_source': None,
                 'bibtex_source_type': None,
                 'bibtex': None}
@@ -113,7 +114,13 @@ def analyse_package(package, source, token=False):
 
                 ###get doi url
                 all_data['doi_url'] = bibtex.extract_bibtex_data(bibtex_str, 'doi')
-
+                
+                ###get citations
+                all_citations = []
+                for doi in all_data['doi_url']:
+                    all_citations.append(crossref.get_citations(doi))
+                all_data['citations'] = all_citations 
+                
                 ###if we have a bibtex we do not need the latest commit
                 all_data['last_commit'] = 'N.A.'
 
@@ -122,7 +129,7 @@ def analyse_package(package, source, token=False):
 
                 ###if it comes from the .bib file it will work for all version
                 all_data['version'] = 'all'
-                
+
                 break
 
             ###then to .cff
