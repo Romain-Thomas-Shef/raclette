@@ -46,6 +46,7 @@ def cross_match_database(package, db_query):
             package['cran_url'] = db_query[0].cran_url
             package['julia_url'] = db_query[0].julia_url
             package['commit'] = db_query[0].commit
+            package['bibtex_source_type'] = db_query[0].bibtex_source_type
             if db_query[0].citation_url != '[]':
                 package['citation_url'] = re.sub("\\ |\\]|\\[|\\'", "", db_query[0].citation_url).split(',') 
             else:
