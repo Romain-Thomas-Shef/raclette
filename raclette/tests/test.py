@@ -1,6 +1,6 @@
 from raclette import get_citations
 
-doi = 'https://doi.org/10.21105/joss.01249'
+doi = 'https://doi.org/10.21105/joss.03021'
 
-get_citations(doi)
+print(get_citations(doi))
 

@@ -88,7 +88,6 @@ def analyse_package(package, source, token=False):
             all_data['repo_name'] = info['repo_name']
 
 
-
     ##Find citation files
     citation_files = [] 
     if all_data['repo_owner']:
@@ -135,9 +134,44 @@ def analyse_package(package, source, token=False):
 
             ###then to .cff
             elif '.cff' in f:
-                ##update bibtex source type
-                all_data['bibtex_source_type'] = '.cff file'
 
+                #Read the file
+                all_data['bibtex_source'] = f
+                _, cff_str = open_files.get_online_file(f)
+
+                ###construct the bibtex
+                bibtex_str, construction = cff_to_bibtex.cff_to_bibtex(cff_str, initial_only=False, author_number=-99)
+
+                ##update bibtex source type
+                if construction == 'preferred-citation': 
+                    all_data['bibtex_source_type'] = 'Pref. citation (cff)'
+                    ###if it comes from the .bib file it will work for all version
+                    all_data['version'] = 'all'
+
+                else:
+                    all_data['bibtex_source_type'] = 'built from .cff'
+                    ###find the version
+
+                ##bibtex
+                all_data['bibtex'] = bibtex_str
+
+                ###get doi url
+                all_data['doi_url'] = bibtex.extract_bibtex_data(bibtex_str, 'doi')
+
+                ###get citations
+                all_citations = []
+                for doi in all_data['doi_url']:
+                    all_citations.append(crossref.get_citations(doi))
+                all_data['citations'] = all_citations 
+                
+                ###if we have a bibtex we do not need the latest commit
+                all_data['last_commit'] = 'N.A.'
+
+                ###url in bibtex
+                all_data['citation_url'] = bibtex.extract_bibtex_data(bibtex_str, 'url')
+
+
+        print(all_data)
 
     
     else:

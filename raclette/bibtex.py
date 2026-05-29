@@ -55,7 +55,7 @@ def extract_bibtex_data(bibtex, selected_field):
                 
                 if selected_field == 'doi' and field.key == 'doi':
                     if 'https://doi.org/' in field.value:
-                        data = field.key
+                        data = field.value
                     else:
                         data = 'https://doi.org/' + field.value 
 

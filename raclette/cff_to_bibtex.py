@@ -11,6 +11,7 @@ Used a lot this documentation: https://bibtex.eu/
 """
 
 ###Python standard library
+import textwrap
 
 ##Third party
 import yaml
@@ -34,12 +35,14 @@ def cff_to_bibtex(filecontent, author_number=-99, initial_only=False):
         bibtex = preferred_citation_to_bibtex(yamlconf['preferred-citation'],
                                              author_number=author_number,
                                              initial_only=initial_only)
+        construction = 'preferred-citation'
     else:
         bibtex = build_bibtex_from_cff(yamlconf,
                                        author_number=author_number,
                                        initial_only=initial_only)
+        construction = 'built'
  
-    return bibtex
+    return bibtex, construction
     
 
 def preferred_citation_to_bibtex(cffdata, author_number=-99, initial_only=False):
@@ -62,32 +65,23 @@ def preferred_citation_to_bibtex(cffdata, author_number=-99, initial_only=False)
             if i == 'authors': 
                 authors_list = ''
                 
-                if len(cffdata[i]) <=2: ##Enforcing format for small list of authors
-                    author_number = -99
-                    initial_only = False
-
-                ###check number of authors allowed
-                if author_number != -99:
-                    final_list_authors = cffdata[i][0:author_number]
-                else:
-                    final_list_authors = cffdata[i]
+                final_list_authors = cffdata[i]
 
                 ##check format 
                 for person in final_list_authors:
                     if 'name' in person or ('given-names' in person and 'family-names' in person):
                         if 'name' in person:
-                            authors_list += f"{person['name']}"
-                        elif initial_only is True:
-                            authors_list += f"{person['family-names']}, {person['given-names'][0]}. and "
+                            authors_list += f"{person['name']} and "
                         else: 
                             authors_list += f"{person['family-names']}, {person['given-names']} and "
                 
-                #clean up the end
-                authors_list = authors_list.strip('and ')
+                
 
-                ##ad 'et al' if we cut some authors
-                if len(cffdata[i]) > len(final_list_authors):
-                    authors_list += ' et al.'
+                #clean up the end
+                authors_list = textwrap.fill(authors_list.strip('and '), 60,
+                                             break_long_words=False).replace('\n', '\n\t\t\t')
+
+                ###add to the final dictionary
                 available_data[i] = authors_list
             
             elif i == 'type':
@@ -102,23 +96,28 @@ def preferred_citation_to_bibtex(cffdata, author_number=-99, initial_only=False)
 
     
     ###Tune pages number
-    if 'start' in available_data and 'pages' not in available_data:
+    if 'start' in available_data and 'end' in available_data and 'pages' not in available_data:
         if available_data['start'] is not None and available_data['end'] is not None:
             available_data['pages'] = '%s--%s'%(available_data['start'], available_data['end'])
             available_data.pop('start')
             available_data.pop('end')
+
     elif 'pages' in available_data and 'start' in available_data and 'end' in available_data:
             available_data.pop('start')
             available_data.pop('end')
             
-
-
     ###this is an arbitrary format, just the identifier to refer to the bibtex entry
     if 'year' in cffdata:
-        citekey = authors_list.split(', ')[0] + str(cffdata['year']) 
+        if 'and' in authors_list:
+            citekey = authors_list.split('and')[0].split(',')[0].strip().replace(" ", "") + str(cffdata['year']) 
+        else:
+            citekey = authors_list.split(', ')[0].strip().replace(" ", "") + str(cffdata['year'])
     else:
-        citekey = authors_list.split(', ')[0]
-    
+        if 'and' in authors_list:
+            citekey = authors_list.split('and')[0].split(',')[0].strip()
+        else:
+            citekey = authors_list.split(', ')[0].split(',')[0]
+
     ##and return the final bibtex assembled    
     return assemble_bibtex(available_data, citekey)
 
