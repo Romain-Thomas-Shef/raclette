@@ -140,7 +140,7 @@ def analyse_package(package, source, token=False):
                 _, cff_str = open_files.get_online_file(f)
 
                 ###construct the bibtex
-                bibtex_str, construction = cff_to_bibtex.cff_to_bibtex(cff_str, initial_only=False, author_number=-99)
+                bibtex_str, construction = cff_to_bibtex.cff_to_bibtex(cff_str)
 
                 ##update bibtex source type
                 if construction == 'preferred-citation': 

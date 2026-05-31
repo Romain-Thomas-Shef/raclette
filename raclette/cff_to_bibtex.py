@@ -19,7 +19,7 @@ import yaml
 ##Local imports
 from . import hardcoded
 
-def cff_to_bibtex(filecontent, author_number=-99, initial_only=False):
+def cff_to_bibtex(filecontent):
     '''
     Parameters
     -----------
@@ -32,20 +32,16 @@ def cff_to_bibtex(filecontent, author_number=-99, initial_only=False):
 
     ###check in there is a "preferred-citation" in it
     if 'preferred-citation' in yamlconf:
-        bibtex = preferred_citation_to_bibtex(yamlconf['preferred-citation'],
-                                             author_number=author_number,
-                                             initial_only=initial_only)
+        bibtex = preferred_citation_to_bibtex(yamlconf['preferred-citation'])
         construction = 'preferred-citation'
     else:
-        bibtex = build_bibtex_from_cff(yamlconf,
-                                       author_number=author_number,
-                                       initial_only=initial_only)
+        bibtex = build_bibtex_from_cff(yamlconf)
         construction = 'built'
  
     return bibtex, construction
     
 
-def preferred_citation_to_bibtex(cffdata, author_number=-99, initial_only=False):
+def preferred_citation_to_bibtex(cffdata):
     '''
     This builds the bibtex entry from a
     preferred citation block of a CFF file
@@ -77,7 +73,7 @@ def preferred_citation_to_bibtex(cffdata, author_number=-99, initial_only=False)
                 
                 
 
-                #clean up the end
+                #clean up the end and cut lines to 60 characters
                 authors_list = textwrap.fill(authors_list.strip('and '), 60,
                                              break_long_words=False).replace('\n', '\n\t\t\t')
 
@@ -121,7 +117,7 @@ def preferred_citation_to_bibtex(cffdata, author_number=-99, initial_only=False)
     ##and return the final bibtex assembled    
     return assemble_bibtex(available_data, citekey)
 
-def build_bibtex_from_cff(cffdata, author_number=-99, initial_only=False):
+def build_bibtex_from_cff(cffdata):
     '''
     This builds the bibtex entry from a
     preferred citation block of a CFF file
@@ -141,33 +137,24 @@ def build_bibtex_from_cff(cffdata, author_number=-99, initial_only=False):
             if i == 'authors': 
                 authors_list = ''
                 
-                if len(cffdata[i]) <=2: ##Enforcing format for small list of authors
-                    author_number = -99
-                    initial_only = False
-
-                ###check number of authors allowed
-                if author_number != -99:
-                    final_list_authors = cffdata[i][0:author_number]
-                else:
-                    final_list_authors = cffdata[i]
+                final_list_authors = cffdata[i]
 
                 ##check format 
                 for person in final_list_authors:
                     if 'name' in person or ('given-names' in person and 'family-names' in person):
                         if 'name' in person:
-                            authors_list += f"{person['name']}"
-                        elif initial_only is True:
-                            authors_list += f"{person['family-names']} {person['given-names'][0]}. and "
+                            authors_list += f"{person['name']} and "
                         else: 
                             authors_list += f"{person['family-names']}, {person['given-names']} and "
-                    
-                #clean up the end
-                authors_list = authors_list.strip('and ')
+ 
 
-                ##ad 'et al' if we cut some authors
-                if len(cffdata[i]) > len(final_list_authors):
-                    authors_list += ' et al.'
+                #clean up the end and cut lines to 60 characters
+                authors_list = textwrap.fill(authors_list.strip('and '), 60,
+                                             break_long_words=False).replace('\n', '\n\t\t\t')
+                ##save it
                 available_data[i] = authors_list
+
+
             elif i == 'type':
                 available_data[i] = hardcoded.cff_type_to_bibtex_type[cffdata[i].lower()]
             else:
