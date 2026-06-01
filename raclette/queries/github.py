@@ -32,6 +32,8 @@ def slash_repo_url(url):
     info = {}
     info['owner'] = url.split('/')[3]
     info['repo'] = url.split('/')[4].split('.git')[0]
+    info['name'] = f"{info['owner']}/{info['repo']}"
+    info['version'] = None
         
     return info
 
@@ -39,7 +41,8 @@ def get_owners_name(github_info, token):
     '''
     This function gets the name of the repo user (not the github username)
     '''
-    ##
+
+    ##make query
     headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
         headers["Authorization"] = f"token {token}"
@@ -51,6 +54,12 @@ def get_owners_name(github_info, token):
     other_info['name_user'] = name_user
 
     return other_info
+
+
+def get_repo_info(repo_url, token):
+    '''
+    '''
+    
 
 def get_citation_url(owner, repo, token):
     '''
@@ -76,7 +85,7 @@ def get_citation_url(owner, repo, token):
     citation_files_urls = []
     other_info = {}
 
-    ##
+    ##make the query
     headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
         headers["Authorization"] = f"token {token}"

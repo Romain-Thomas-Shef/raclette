@@ -16,6 +16,7 @@ import argparse
 ##Local imports
 from . import open_files
 from .. import python_analysis
+from ..queries import github
 
 def command_line_interface(args):
     '''
@@ -91,7 +92,10 @@ def analyse_arguments(parsed):
             config['packages'][name] = version_info
 
         elif config['source'] == 'github':
-            print('ok')
+            print(p)
+            info_repo = github.slash_repo_url(p)
+            config['packages'][info_repo['name']] = info_repo
+
     return config
     
 

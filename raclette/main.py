@@ -18,7 +18,7 @@ import sys
 
 ####Local imports
 from .utils import cli, open_files
-from .queries import pypi, github
+from .queries import github
 from . import cff_to_bibtex,bibtex,python_analysis, crossref
 
 def main():
@@ -69,10 +69,12 @@ def analyse_package(package, source, token=False):
                 'bibtex_source_type': None,
                 'bibtex': None}
 
-    ##start filling the results:
-    all_data['name'] = package['name']
+    print(package)
 
     if source == 'pypi':
+        ##start filling the results:
+        all_data['name'] = package['name']
+
         ##some info will be useless
         all_data['platform'] = 'pypi'
         all_data['cran_url'] = 'N.A.'
@@ -87,6 +89,16 @@ def analyse_package(package, source, token=False):
             all_data['repo_owner'] = info['repo_owner']
             all_data['repo_name'] = info['repo_name']
 
+    if source == 'github':
+        ##some info will be useless
+        all_data['platform'] = 'github'
+        all_data['cran_url'] = 'N.A.'
+        all_data['pypi_url'] = 'N.A.'
+
+        ###get info from github
+        all_data['repo_name'] = package['repo']
+        all_data['repo_owner'] = package['owner']
+        all_data['name'] = package['name']
 
     ##Find citation files
     citation_files = [] 

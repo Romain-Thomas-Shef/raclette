@@ -496,7 +496,7 @@ https://github.com/spm/spm
 https://github.com/T0ngChen/medRCT
 https://github.com/valentingar/confluxpro/
 https://github.com/DFKI-NI/syclops
-https://www.github.com/openmsr/CAD_to_OpenMC
+https://github.com/openmsr/CAD_to_OpenMC
 https://github.com/angelmons/landlab
 https://github.com/bempp/kifmm/
 https://github.com/m-shahbaz-kharal/LiGuard-JOSS
@@ -685,7 +685,7 @@ https://github.com/mxwalbert/cohesivm
 https://github.com/darrenjw/jax-smfsb
 https://github.com/davidogara/hetGPy
 https://github.com/ImperialCollegeLondon/PyProBE
-https://www.github.com/ropensci/gigs
+https://github.com/ropensci/gigs
 https://github.com/LebeerLab/tidytacos
 https://github.com/OPM/pyopmspe11
 https://github.com/bcgov/ssdtools
@@ -753,7 +753,7 @@ https://github.com/amisr/amisrsynthdata
 https://github.com/PLN-team/pyPLNmodels.git
 https://github.com/AutoResearch/autora-paper
 https://github.com/kumiori/irrevolutions
-http://github.com/cdjellen/ndbc-api
+https://github.com/cdjellen/ndbc-api
 https://github.com/AthinaLange/CoastalLens
 https://github.com/ORNL/dasp-stacker
 https://github.com/dodge-research-group/thztools
@@ -1154,7 +1154,7 @@ https://github.com/seamplex/feenox/
 https://github.com/FabianPlum/OmniTrax
 https://github.com/RJArthern/WAVI.jl
 https://github.com/NSAPH-Software/GPCERF
-http://github.com/pylops/pyproximal/
+https://github.com/pylops/pyproximal/
 https://github.com/chadagreene/Tide-Model-Driver
 https://github.com/FAU-LAP/NOMAD-CAMELS
 https://github.com/moritzobenauer/ProjectRaccoon
@@ -1856,7 +1856,7 @@ https://github.com/elizabethnewman/hessQuik
 https://github.com/RWTH-EBC/AixCaliBuHA
 https://github.com/mithun218/GiNaCDE
 https://github.com/dgbowl/yadg
-http://github.com/weecology/portalcasting
+https://github.com/weecology/portalcasting
 https://github.com/Anaphory/lexedata/
 https://github.com/SINTEF/AutoActive-ActivityPresenter.git
 https://github.com/pygsflow/pygsflow.git
@@ -2262,7 +2262,7 @@ https://github.com/symmy596/Polypy
 https://github.com/imr-framework/OCTOPUS
 https://github.com/giswqs/lidar
 https://github.com/montilab/nf-gwas-pipeline
-https://www.github.com/pangeo-data/climpred
+https://github.com/pangeo-data/climpred
 https://github.com/ghislainv/forestatrisk
 https://github.com/zemogle/astrosource/
 https://github.com/NREL/OpenOA
@@ -2387,7 +2387,7 @@ https://github.com/NCAS-CMS/cfdm
 https://github.com/andyphilips/dynamac
 https://github.com/VU-BEAM-Lab/GENRE
 https://github.com/anwarbio/bioassays
-http://github.com/jollejolles/pirecorder
+https://github.com/jollejolles/pirecorder
 https://github.com/tbrown122387/pf
 https://github.com/ropensci/medrxivr
 https://github.com/nhejazi/txshift
@@ -2653,7 +2653,7 @@ https://github.com/marouenbg/ACHR.cu
 https://github.com/imr-framework/virtual-scanner
 https://github.com/michellab/BioSimSpace
 https://github.com/MLHale/eyestream
-http://github.com/tidyverse/tidyverse
+https://github.com/tidyverse/tidyverse
 https://github.com/HypothesisWorks/hypothesis/
 https://github.com/junbinzhao/FluxCalR/
 https://github.com/KaiWenger/memochange
@@ -2670,7 +2670,7 @@ https://github.com/matt002/GaitPy
 https://github.com/srmnitc/pyscal
 https://github.com/ropensci/workloopR/
 https://github.com/kahaaga/UncertainData.jl
-https://www.github.com/ropensci/lightr
+https://github.com/ropensci/lightr
 https://github.com/rmsare/pymccrgb
 https://github.com/OttaviaE/DscoreApp
 https://github.com/TerrainBento/umami
@@ -2827,7 +2827,7 @@ https://github.com/MTgeophysics/mtpy
 https://github.com/carterenyi/emviz
 https://github.com/slu-openGIS/areal
 https://github.com/pyvista/pyvista
-https://www.github.com/singularityhub/container-tree
+https://github.com/singularityhub/container-tree
 https://github.com/osorensen/hdme
 https://github.com/tqdm/tqdm
 https://github.com/RadioAstronomySoftwareGroup/pyuvsim/
@@ -2838,7 +2838,7 @@ https://github.com/davekinkead/reasons
 https://github.com/skyportal/skyportal
 https://github.com/brandondube/prysm
 https://github.com/mikahama/uralicNLP
-https://www.github.com/vsoch/watchme
+https://github.com/vsoch/watchme
 https://github.com/abatten/fruitbat
 https://github.com/jlincbio/cred
 https://github.com/jason-neal/eniric
@@ -2991,7 +2991,7 @@ https://github.com/rrrlw/helixvis
 https://github.com/mattgolub/fixed-point-finder
 https://github.com/malmaud/TensorFlow.jl
 https://github.com/arives/rr2
-https://www.github.com/vc1492a/PyNomaly
+https://github.com/vc1492a/PyNomaly
 https://github.com/nlgranger/SeqTools
 https://github.com/davidnsousa/mcsd
 https://github.com/hippylib/hippylib
@@ -3059,7 +3059,7 @@ https://github.com/rrrlw/TDAstats
 https://github.com/lumenlearning/rise
 https://github.com/ropensci/jstor
 https://github.com/lucydot/effmass
-https://www.github.com/vsoch/containershare
+https://github.com/vsoch/containershare
 https://github.com/SMTG-UCL/sumo
 https://github.com/pdwaggoner/hhi
 https://github.com/andrewthomasjones/logKDE
@@ -3087,7 +3087,7 @@ https://github.com/jfjlaros/bin-parser
 https://github.com/HPAC/matchpy
 https://github.com/spinicist/QUIT
 https://github.com/ellessenne/rsimsum/
-https://www.github.com/vsoch/helpme
+https://github.com/vsoch/helpme
 https://github.com/strengejacke/sjmisc
 https://github.com/j-faria/kima
 https://github.com/mlpack/mlpack
@@ -3172,7 +3172,7 @@ https://github.com/dartsim/dart
 https://github.com/Molmed/checkQC
 https://github.com/neuropsychology/psycho.R
 https://github.com/danilofreire/prisonbrief
-https://www.github.com/expfactory/expfactory
+https://github.com/expfactory/expfactory
 https://github.com/openclimatedata/pymagicc
 https://github.com/onecodex/finch-rs
 https://github.com/boisgera/bitstream
@@ -3227,7 +3227,7 @@ https://github.com/biogo/ncbi
 https://github.com/bebatut/enasearch
 https://github.com/genexplain/geneXplainR
 https://github.com/conradsnicta/armadillo-gmm
-https://www.github.com/singularityhub/sregistry
+https://github.com/singularityhub/sregistry
 https://github.com/uglymol/uglymol
 https://github.com/GabrieleRovigatti/prodest/tree/master/prodest
 https://github.com/adrn/gala
@@ -3257,7 +3257,7 @@ https://github.com/ropensci/visdat
 https://github.com/bjmorgan/bsym
 https://github.com/xuanxu/nimbus
 https://github.com/mwmclean/RefManageR
-http://github.com/simonvh/genomepy
+https://github.com/simonvh/genomepy
 https://github.com/ropensci/iheatmapr
 https://github.com/scikit-hep/root_numpy
 https://github.com/TACC/launcher
@@ -3347,7 +3347,7 @@ https://github.com/pboesu/rucrdtw
 https://github.com/DannyArends/CTLmapping
 https://github.com/chtheodoro/Habfuzz
 https://github.com/bihealth/vcfpy
-http://github.com/zmjones/edarf/
+https://github.com/zmjones/edarf/
 https://github.com/jiemakel/las
 https://github.com/carlganz/rintrojs
 https://github.com/SebastianBocquet/pygtc
@@ -3366,7 +3366,7 @@ https://github.com/kehraProject/r_rdefra
 https://github.com/barbagroup/pygbe
 https://github.com/zoran-cuckovic/QGIS-visibility-analysis
 https://github.com/sbogutzky/PsychoPhysioCollector
-http://github.com/sdwfrost/Gillespie.jl
+https://github.com/sdwfrost/Gillespie.jl
 https://github.com/EducationalTestingService/rsmtool
 https://github.com/michaellevy/gwdegree
 https://github.com/juliasilge/tidytext
@@ -3379,8 +3379,8 @@ https://github.com/dfm/corner.py
 https://github.com/phenoscape/scowl
 https://github.com/PeteHaitch/GenomicTuples
 https://github.com/harpolea/r3d2
-http://github.com/genomematt/xenomapper/
+https://github.com/genomematt/xenomapper/
 https://github.com/jtauber/pyuca
-http://github.com/jakevdp/mst_clustering
+https://github.com/jakevdp/mst_clustering
 https://github.com/applicationskeleton/Skeleton
 https://github.com/diana-hep/carl
